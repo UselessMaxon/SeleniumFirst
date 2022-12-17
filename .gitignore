@@ -3,6 +3,3 @@
 /.idea
 *.iml
 /resurses/chromedriver.exe
-
-# Project exclude paths
-/target/
