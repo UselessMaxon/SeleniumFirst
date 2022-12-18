@@ -13,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,6 +26,7 @@ public class trainingBT {
     String user3 = "Sekretar Kompanii";
     String user4 = "Секретарь";
     String passUser = "testing";
+    Date dateNow = new Date();
 
 
     private WebDriver driver;
@@ -50,7 +52,7 @@ public class trainingBT {
 
         //Шаг №2: Пройти авторизацию.
         wait.until(visibilityOf(driver.findElement(By.xpath("//form[contains(@id, 'login-form')]"))));
-        driver.findElement(By.xpath("//input[contains(@name, 'username')]")).sendKeys(user4);
+        driver.findElement(By.xpath("//input[contains(@name, 'username')]")).sendKeys(user1);
         driver.findElement(By.xpath("//input[contains(@name, 'password')]")).sendKeys(passUser);
         driver.findElement(By.xpath("//button[text()='Войти']")).click();
 
@@ -76,7 +78,66 @@ public class trainingBT {
         wait.until(visibilityOf(titleCreateTrip));
         assertEquals("Создать командировку", titleCreateTrip.getText(), "Заголовок 'Создать командировку' не найден");
 
-        //Шаг №7: На странице создания командировки заполнить или выбрать поля:....
+        //Шаг №7: На странице создания командировки заполнить или выбрать поля:...
+
+        WebElement  departmentsChoice = driver.findElement(By.xpath("//select[contains(@name, 'businessUnit')]")); //Подразделение - выбрать Отдел внутренней разработки
+        departmentsChoice.click();
+        String departmentList = "//div[contains(@id, 'uniform-crm_business_trip') and contains (@class, 'focus')]";
+        wait.until(visibilityOf(driver.findElement(
+                By.xpath(departmentList))));
+        driver.findElement(By.xpath(departmentList +"/select/option[text() ='Отдел внутренней разработки']")).click();
+
+        driver.findElement(By.xpath("//a[@id='company-selector-show']")).click(); //Принимающая организация - нажать "Открыть список" и в поле "Укажите организацию" выбрать любое значение
+        driver.findElement(By.xpath("//a/span[@class='select2-chosen']")).click();
+        wait.until(visibilityOf(driver.findElement(
+                By.xpath("//div[@class= 'select2-search']/input[ contains(@class, 'select2-focused')]"))));
+        driver.findElement(By.xpath("//div/ul/li/div[@class= 'select2-result-label']")).click();
+
+        driver.findElement(By.xpath("//label[text()='Заказ билетов']/preceding-sibling::input[@type= 'checkbox']"))
+                .click(); // В задачах поставить чекбокс на "Заказ билетов"
+
+        driver.findElement(By.xpath("//input[contains(@data-name, 'departure-city')]")).clear();
+        driver.findElement(By.xpath("//input[contains(@data-name, 'departure-city')]")).sendKeys("Ижевск"); // Указать город выбытия
+        driver.findElement(By.xpath("//input[contains(@data-name, 'arrival-city')]")).sendKeys("Пермь"); // Указать город прибытия
+
+        driver.findElement(By.xpath("//input[contains(@id, 'departureDatePlan') and contains(@class, 'input')]")) // Указать дату выезда
+                .click();
+        driver.findElement(By.xpath("//button[@data-handler='today']")).click();
+        wait.until(invisibilityOf(driver.findElement(
+                By.xpath("//div[@id='ui-datepicker-div' and contains(@style, 'none')]"))));
+
+        driver.findElement(By.xpath("//input[contains(@id, 'returnDatePlan') and contains(@class, 'input')]")) // Указать дату возвращения
+                .click();
+        driver.findElement(By.xpath("//a[@class='ui-datepicker-next ui-corner-all']")).click();
+        driver.findElement(By.xpath("//a[contains(@class, 'ui-state-default') and text()='1']")).click();
+        wait.until(invisibilityOf(driver.findElement(
+                By.xpath("//div[@id='ui-datepicker-div' and contains(@style, 'none')]"))));
+
+
+        //Шаг: 8: Проверить, что все поля заполнены правильно.
+        WebElement selectedDepartment = driver.findElement(By.xpath("//div[@class='selector input-widget-select' and contains(@id, 'usinessUnit')]/span)")); //Подразделение
+        assertEquals("Отдел внутренней разработки", selectedDepartment.getText(), "Подразделение выбрано некорректно");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -155,7 +216,7 @@ public class trainingBT {
     public void after() {
 
         try {
-            Thread.sleep(5000);
+            Thread.sleep(99000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -166,6 +227,5 @@ public class trainingBT {
     public void loading() {
         wait.until(invisibilityOf(driver.findElement(By.xpath("//div[@class='loader-mask shown']"))));
     }
-
 
 }
