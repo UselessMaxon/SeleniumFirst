@@ -91,7 +91,9 @@ public class trainingBT {
         driver.findElement(By.xpath("//a/span[@class='select2-chosen']")).click();
         wait.until(visibilityOf(driver.findElement(
                 By.xpath("//div[@class= 'select2-search']/input[ contains(@class, 'select2-focused')]"))));
-        driver.findElement(By.xpath("//div/ul/li/div[@class= 'select2-result-label']")).click();
+        WebElement selectedHostOrg = driver.findElement(By.xpath("//div/ul/li/div[@class= 'select2-result-label']"));
+        String stringSelectedHostOrg = selectedHostOrg.getText();
+        selectedHostOrg.click();
 
         driver.findElement(By.xpath("//label[text()='Заказ билетов']/preceding-sibling::input[@type= 'checkbox']"))
                 .click(); // В задачах поставить чекбокс на "Заказ билетов"
@@ -115,8 +117,19 @@ public class trainingBT {
 
 
         //Шаг: 8: Проверить, что все поля заполнены правильно.
-        WebElement selectedDepartment = driver.findElement(By.xpath("//div[@class='selector input-widget-select' and contains(@id, 'usinessUnit')]/span)")); //Подразделение
-        assertEquals("Отдел внутренней разработки", selectedDepartment.getText(), "Подразделение выбрано некорректно");
+        WebElement selectedDepartment = driver.findElement(By.xpath("//div[@class='selector input-widget-select' and contains(@id, 'businessUnit')]/span")); //Подразделение
+        assertEquals("Отдел внутренней разработки", selectedDepartment.getText(), "Подразделение отображается некорректно");
+
+        WebElement vieHostOrg = driver.findElement(By.xpath("//span[@class='select2-chosen']")); //Принимающая организация
+        assertEquals(stringSelectedHostOrg, vieHostOrg.getText(), "Принимающая организация отображается некорректно");
+
+        //Проверка чекбокса//
+
+
+
+
+
+
 
 
 
@@ -216,7 +229,7 @@ public class trainingBT {
     public void after() {
 
         try {
-            Thread.sleep(99000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
