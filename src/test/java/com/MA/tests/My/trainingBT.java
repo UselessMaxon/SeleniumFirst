@@ -19,10 +19,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
+import java.util.function.BooleanSupplier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOf;
 
 public class trainingBT {
 
@@ -120,6 +122,7 @@ public class trainingBT {
 
         WebElement dateReturn = driver.findElement(By.xpath("//input[contains(@id, 'returnDatePlan') and contains(@class, 'input')]")); // Указать дату возвращения
         dateReturn.sendKeys("01.01.2029");
+        driver.findElement(By.xpath("//div[@id='oro-dropdown-mask']")).click(); // Клик для закрытия окна с выбором даты
 
         //Шаг: 8: Проверить, что все поля заполнены правильно.
         WebElement selectedDepartment = driver.findElement(
@@ -139,7 +142,12 @@ public class trainingBT {
 
         assertEquals("01.01.2029", dateReturn.getAttribute("value"), "Дата приезда введена не правильно"); // Проверка даты приезда
 
+        //Шаг 9: Нажать Сохранить и закрыть.
+        driver.findElement(By.xpath("//button[@class='btn btn-success action-button']")).click();
+        wait.until(invisibilityOf(driver.findElement(By.xpath("//input[@name='input_action' and contains(@value,'route')]"))));
+        loading();
 
+        //Шаг 10
 
 
 
