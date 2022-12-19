@@ -12,11 +12,16 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class trainingBT {
@@ -26,8 +31,9 @@ public class trainingBT {
     String user3 = "Sekretar Kompanii";
     String user4 = "Секретарь";
     String passUser = "testing";
-    Date dateNow = new Date();
 
+    Date dateNow = new Date();
+    DateFormat dateNorm = new SimpleDateFormat("dd.MM.yyyy");
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -95,35 +101,58 @@ public class trainingBT {
         String stringSelectedHostOrg = selectedHostOrg.getText();
         selectedHostOrg.click();
 
-        driver.findElement(By.xpath("//label[text()='Заказ билетов']/preceding-sibling::input[@type= 'checkbox']"))
-                .click(); // В задачах поставить чекбокс на "Заказ билетов"
+        WebElement CheckBOrderTick =  driver.findElement(   // В задачах поставить чекбокс на "Заказ билетов"
+                By.xpath("//label[text()='Заказ билетов']/preceding-sibling::input[@type= 'checkbox']"));
+        CheckBOrderTick.click();
 
-        driver.findElement(By.xpath("//input[contains(@data-name, 'departure-city')]")).clear();
-        driver.findElement(By.xpath("//input[contains(@data-name, 'departure-city')]")).sendKeys("Ижевск"); // Указать город выбытия
-        driver.findElement(By.xpath("//input[contains(@data-name, 'arrival-city')]")).sendKeys("Пермь"); // Указать город прибытия
+        WebElement fieldDepCity = driver.findElement(By.xpath("//input[contains(@data-name, 'departure-city')]")); // Указать город выбытия
+        fieldDepCity.clear();
+        fieldDepCity.sendKeys("Ижевск");
 
-        driver.findElement(By.xpath("//input[contains(@id, 'departureDatePlan') and contains(@class, 'input')]")) // Указать дату выезда
-                .click();
+        WebElement fieldArrivCity = driver.findElement(By.xpath("//input[contains(@data-name, 'arrival-city')]")); // Указать город прибытия
+        fieldArrivCity.sendKeys("Пермь");
+
+        WebElement datePlan = driver.findElement(By.xpath("//input[contains(@id, 'departureDatePlan') and contains(@class, 'input')]")); // Указать дату выезда
+        datePlan.click();
         driver.findElement(By.xpath("//button[@data-handler='today']")).click();
         wait.until(invisibilityOf(driver.findElement(
                 By.xpath("//div[@id='ui-datepicker-div' and contains(@style, 'none')]"))));
 
-        driver.findElement(By.xpath("//input[contains(@id, 'returnDatePlan') and contains(@class, 'input')]")) // Указать дату возвращения
-                .click();
-        driver.findElement(By.xpath("//a[@class='ui-datepicker-next ui-corner-all']")).click();
-        driver.findElement(By.xpath("//a[contains(@class, 'ui-state-default') and text()='1']")).click();
-        wait.until(invisibilityOf(driver.findElement(
-                By.xpath("//div[@id='ui-datepicker-div' and contains(@style, 'none')]"))));
-
+        WebElement dateReturn = driver.findElement(By.xpath("//input[contains(@id, 'returnDatePlan') and contains(@class, 'input')]")); // Указать дату возвращения
+        dateReturn.sendKeys("01.01.2029");
 
         //Шаг: 8: Проверить, что все поля заполнены правильно.
-        WebElement selectedDepartment = driver.findElement(By.xpath("//div[@class='selector input-widget-select' and contains(@id, 'businessUnit')]/span")); //Подразделение
+        WebElement selectedDepartment = driver.findElement(
+                By.xpath("//div[@class='selector input-widget-select' and contains(@id, 'businessUnit')]/span")); //Подразделение
         assertEquals("Отдел внутренней разработки", selectedDepartment.getText(), "Подразделение отображается некорректно");
 
         WebElement vieHostOrg = driver.findElement(By.xpath("//span[@class='select2-chosen']")); //Принимающая организация
         assertEquals(stringSelectedHostOrg, vieHostOrg.getText(), "Принимающая организация отображается некорректно");
 
-        //Проверка чекбокса//
+        assertTrue(CheckBOrderTick.isSelected(), "Чекбокс 'Покупка билетов не выбран'"); //Проверка чекбокса
+
+        assertEquals("Ижевск", fieldDepCity.getAttribute("value"), "Город выбытия введен не правильно"); // Проверка города выбытия
+
+        assertEquals("Пермь", fieldArrivCity.getAttribute("value"), "Город прибытия введен не правильно"); // Проверка города прибытия
+
+        assertEquals(dateNorm.format(dateNow), datePlan.getAttribute("value"), "Дата выезда введена не правильно"); // Проверка даты выезда
+
+        assertEquals("01.01.2029", dateReturn.getAttribute("value"), "Дата приезда введена не правильно"); // Проверка даты приезда
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
