@@ -14,12 +14,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
-import java.util.function.BooleanSupplier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -43,7 +39,6 @@ public class trainingBT {
 
     @BeforeEach
     public void before() {
-
         System.setProperty("webdriver.chrome.driver", "src/test/resources/webdriver/chromedriver.exe");
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10, 1000);
@@ -147,57 +142,13 @@ public class trainingBT {
         wait.until(invisibilityOf(driver.findElement(By.xpath("//input[@name='input_action' and contains(@value,'route')]"))));
         loading();
 
-        //Шаг 10
+        //Шаг 10: Проверить, что на странице появилось сообщение: "Список командируемых сотрудников не может быть пустым".
+        String PathError =
+                "//span[@class='validation-failed' and text()='Список командируемых сотрудников не может быть пустым']" +
+                "/ancestor::div/h5/span[text()='Командированные сотрудники']";
+        wait.until(visibilityOf(driver.findElement(By.xpath(PathError))));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        System.out.println("Кейс №1 makeBusinessTrip 'Появление ошибки на незаполненного Командированного сотрудника' = Успешен");
     }
 
 
