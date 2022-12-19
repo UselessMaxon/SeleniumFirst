@@ -151,68 +151,6 @@ public class trainingBT {
         System.out.println("Кейс №1 makeBusinessTrip 'Появление ошибки на незаполненного Командированного сотрудника' = Успешен");
     }
 
-
-    @Test
-    public void testExample() {
-
-        //Шаг №1: Авторизация.
-        driver.get("http://training.appline.ru/user/login");
-        wait.until(visibilityOf(driver.findElement(By.xpath("//form[contains(@id, 'login-form')]"))));
-        driver.findElement(By.xpath("//input[contains(@name, 'username')]")).sendKeys(user4);
-        driver.findElement(By.xpath("//input[contains(@name, 'password')]")).sendKeys(passUser);
-        driver.findElement(By.xpath("//button[text()='Войти']")).click();
-        wait.until(visibilityOf(driver.findElement(By.xpath("//h1[text()='Панель быстрого запуска']"))));
-
-        //Шаг №2: Перейти в командировки.
-        WebElement costsList = driver.findElement(By.xpath("//ul[contains(@class, 'main-menu')]/li/a/span[text()='Расходы']"));
-        costsList.click();
-
-        wait.until(visibilityOf(costsList.findElement(By.xpath
-                ("./ancestor::li//ul[@class='dropdown-menu menu_level_1']"))));
-        driver.findElement(By.xpath("//span[text()='Командировки']")).click();
-
-        //Проверить своим методом 25:10
-        loading();
-
-        //Шаг 3: Фильтр.
-        driver.findElement(By.xpath("//div[@class='filter-item oro-drop']/div[contains(text(), 'Стадия')]")).click();
-        wait.until(visibilityOf(
-                driver.findElement(By.xpath("//div[contains(@class, 'ui-multiselect-menu ui-corner-all')]"))));
-        driver.findElement(By.xpath
-                        ("//div[contains(@class, 'ui-multiselect-menu ui-corner-all')]//input[@type='search']")).
-                sendKeys("Согласование с ОСР");
-        driver.findElement(By.xpath("//label[@title='Согласование с ОСР']")).click();
-        loading();
-
-        String id = driver.findElement(By.xpath("//td[text()='Питер']/parent::tr/td[contains(@class, 'name')]")).getText();
-        driver.findElement(By.xpath("//div[@class='filter-item oro-drop']/div[contains(text(), 'Номер')]")).click();
-        wait.until(visibilityOf(
-                driver.findElement(By.xpath("//input[@name='value']")))).sendKeys(id, Keys.ENTER);
-        loading();
-
-        //Шаг №4: Переход в командировку.
-        driver.findElement(By.xpath(String.format("//td[contains(@class, 'grid-body-cell-name')][text() = '%s']", id))).click();
-
-        WebElement actualId = driver.findElement(By.xpath("//h1[@class= 'user-name']"));
-        wait.until(visibilityOf(actualId));
-        assertEquals(id, actualId.getText(), "Мы попали на неверную страницу");
-
-        //Шаг 5: Отменить.
-        driver.findElement(By.xpath("//a[@data-transition-label='Отменить']")).click();
-        loading();
-        wait.until(visibilityOf(driver.findElement(By.xpath("//div[@role='dialog']"))));
-        driver.findElement(By.xpath("//div[@role='dialog']//button[@type='submit']")).click();
-
-        String massage = "Не удалось выполнить переход";
-        Assertions.assertTrue(driver.findElement(By.xpath("//div[@class = 'flash-message-frame']")).isDisplayed(),
-                "Нотификация не отобразилась");
-        assertEquals(massage, driver.findElement(By.xpath("//div[@class='message']")).getText(),
-                String.format("Текст нотификации не совпадает. Ожидаемое значение [%s]", massage));
-
-
-        System.out.println("Тест кейс testExample выполнен успешно");
-    }
-
     @AfterEach
     public void after() {
 
