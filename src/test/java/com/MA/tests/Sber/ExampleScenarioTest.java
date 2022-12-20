@@ -20,9 +20,9 @@ public class ExampleScenarioTest {
 
     @Before
     public void before() {
-//      Для Мас и Linux
+//      Р”Р»СЏ РњР°СЃ Рё Linux
         System.setProperty("webdriver.chrome.driver", "src/test/resources/webdriver/chromedriver");
-//      Для Windows
+//      Р”Р»СЏ Windows
 //        System.setProperty("webdriver.chrome.driver", "src/test/resources/webdriver/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -42,83 +42,83 @@ public class ExampleScenarioTest {
         WebElement cookiesBtnClose = driver.findElement(By.xpath(cookiesClose));
         cookiesBtnClose.click();
 
-        // выбрать пункт меню - "Страхование"
-        String insuranceButtonXPath = "//a[contains(text(), 'Страхование') and contains(@role, 'button')]";
+        // РІС‹Р±СЂР°С‚СЊ РїСѓРЅРєС‚ РјРµРЅСЋ - "РЎС‚СЂР°С…РѕРІР°РЅРёРµ"
+        String insuranceButtonXPath = "//a[contains(text(), 'РЎС‚СЂР°С…РѕРІР°РЅРёРµ') and contains(@role, 'button')]";
         WebElement insuranceButton = driver.findElement(By.xpath(insuranceButtonXPath));
         waitUtilElementToBeClickable(insuranceButton);
         insuranceButton.click();
 
 
-        // выбрать пункт подменю - "Путешествия"
-        String sberInsuranceButtonXPath = "//a[text()='Путешествия']";
+        // РІС‹Р±СЂР°С‚СЊ РїСѓРЅРєС‚ РїРѕРґРјРµРЅСЋ - "РџСѓС‚РµС€РµСЃС‚РІРёСЏ"
+        String sberInsuranceButtonXPath = "//a[text()='РџСѓС‚РµС€РµСЃС‚РІРёСЏ']";
         WebElement travellersInsuranceButton = driver.findElement(By.xpath(sberInsuranceButtonXPath));
         waitUtilElementToBeClickable(travellersInsuranceButton);
         travellersInsuranceButton.click();
 
-        // проверка открытия страницы "Страхование"
-        Assert.assertEquals("Заголовок отсутствует/не соответствует требуемому",
-                "Купить туристическую страховку для выезда за границу — СберБанк", driver.getTitle());
+        // РїСЂРѕРІРµСЂРєР° РѕС‚РєСЂС‹С‚РёСЏ СЃС‚СЂР°РЅРёС†С‹ "РЎС‚СЂР°С…РѕРІР°РЅРёРµ"
+        Assert.assertEquals("Р—Р°РіРѕР»РѕРІРѕРє РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚/РЅРµ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ С‚СЂРµР±СѓРµРјРѕРјСѓ",
+                "РљСѓРїРёС‚СЊ С‚СѓСЂРёСЃС‚РёС‡РµСЃРєСѓСЋ СЃС‚СЂР°С…РѕРІРєСѓ РґР»СЏ РІС‹РµР·РґР° Р·Р° РіСЂР°РЅРёС†Сѓ вЂ” РЎР±РµСЂР‘Р°РЅРє", driver.getTitle());
 
-        // нажать кнопку "Оформить онлайн"
-        String checkoutOnlineXPath = "//*[text()='Оформить онлайн']/../../a[@data-test-id]";
+        // РЅР°Р¶Р°С‚СЊ РєРЅРѕРїРєСѓ "РћС„РѕСЂРјРёС‚СЊ РѕРЅР»Р°Р№РЅ"
+        String checkoutOnlineXPath = "//*[text()='РћС„РѕСЂРјРёС‚СЊ РѕРЅР»Р°Р№РЅ']/../../a[@data-test-id]";
         WebElement checkoutOnlineButton = driver.findElement(By.xpath(checkoutOnlineXPath));
         waitUtilElementToBeClickable(checkoutOnlineButton);
         checkoutOnlineButton.click();
 
-        // проверка открытия страницы "Страхование путешественников"
+        // РїСЂРѕРІРµСЂРєР° РѕС‚РєСЂС‹С‚РёСЏ СЃС‚СЂР°РЅРёС†С‹ "РЎС‚СЂР°С…РѕРІР°РЅРёРµ РїСѓС‚РµС€РµСЃС‚РІРµРЅРЅРёРєРѕРІ"
         String pageTitleXPath = "//h2";
         waitUtilElementToBeVisible(By.xpath(pageTitleXPath));
         WebElement pageTitle = driver.findElement(By.xpath(pageTitleXPath));
-        Assert.assertEquals("Заголовок отсутствует/не соответствует требуемому",
-                "Страхование путешественников", pageTitle.getText());
+        Assert.assertEquals("Р—Р°РіРѕР»РѕРІРѕРє РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚/РЅРµ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ С‚СЂРµР±СѓРµРјРѕРјСѓ",
+                "РЎС‚СЂР°С…РѕРІР°РЅРёРµ РїСѓС‚РµС€РµСЃС‚РІРµРЅРЅРёРєРѕРІ", pageTitle.getText());
 
-        // выбрать тариф страхования "Минимальный"
-        String insuranceCoverageAmountXPath = "//h3[text()='Минимальная']";
+        // РІС‹Р±СЂР°С‚СЊ С‚Р°СЂРёС„ СЃС‚СЂР°С…РѕРІР°РЅРёСЏ "РњРёРЅРёРјР°Р»СЊРЅС‹Р№"
+        String insuranceCoverageAmountXPath = "//h3[text()='РњРёРЅРёРјР°Р»СЊРЅР°СЏ']";
         WebElement insuranceCoverageAmount = driver.findElement(By.xpath(insuranceCoverageAmountXPath));
         scrollToElementJs(insuranceCoverageAmount);
         waitUtilElementToBeClickable(insuranceCoverageAmount);
         insuranceCoverageAmount.click();
 
-        // кликнуть по кнопке "Оформить"
-        String checkoutButtonXPath = "//button[text()='Оформить']";
+        // РєР»РёРєРЅСѓС‚СЊ РїРѕ РєРЅРѕРїРєРµ "РћС„РѕСЂРјРёС‚СЊ"
+        String checkoutButtonXPath = "//button[text()='РћС„РѕСЂРјРёС‚СЊ']";
         WebElement checkoutButton = driver.findElement(By.xpath(checkoutButtonXPath));
         scrollToElementJs(checkoutButton);
         waitUtilElementToBeClickable(checkoutButton);
         checkoutButton.click();
 
-        // заполнить поля данными
+        // Р·Р°РїРѕР»РЅРёС‚СЊ РїРѕР»СЏ РґР°РЅРЅС‹РјРё
         String fieldXPath = "//input[@id='%s']";
-        fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "surname_vzr_ins_0"))), "Застраованный");
-        fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "name_vzr_ins_0"))), "Степан");
+        fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "surname_vzr_ins_0"))), "Р—Р°СЃС‚СЂР°РѕРІР°РЅРЅС‹Р№");
+        fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "name_vzr_ins_0"))), "РЎС‚РµРїР°РЅ");
         fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "birthDate_vzr_ins_0"))), "01.01.1990");
-        fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "person_lastName"))), "Страхователь");
-        fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "person_firstName"))), "Иван");
-        fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "person_middleName"))), "Иванович");
+        fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "person_lastName"))), "РЎС‚СЂР°С…РѕРІР°С‚РµР»СЊ");
+        fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "person_firstName"))), "РРІР°РЅ");
+        fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "person_middleName"))), "РРІР°РЅРѕРІРёС‡");
         fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "person_birthDate"))), "02.02.1992");
         fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "passportSeries"))), "4444");
         fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "passportNumber"))), "777666");
         fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "documentDate"))), "09.09.2009");
-        fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "documentIssue"))), "Паспортный стол");
+        fillInputField(driver.findElement(By.xpath(String.format(fieldXPath, "documentIssue"))), "РџР°СЃРїРѕСЂС‚РЅС‹Р№ СЃС‚РѕР»");
 
-        // кликнуть по кнопке "Продолжить"
-        String continueButtonXPath = "//button[contains(text(),'Продолжить')]";
+        // РєР»РёРєРЅСѓС‚СЊ РїРѕ РєРЅРѕРїРєРµ "РџСЂРѕРґРѕР»Р¶РёС‚СЊ"
+        String continueButtonXPath = "//button[contains(text(),'РџСЂРѕРґРѕР»Р¶РёС‚СЊ')]";
         WebElement continueButton = driver.findElement(By.xpath(continueButtonXPath));
         scrollToElementJs(continueButton);
         waitUtilElementToBeClickable(continueButton);
         continueButton.click();
 
-        // проверить сообщение об ошибке
-        checkErrorMessageAtField(driver.findElement(By.xpath(String.format(fieldXPath, "phone"))), "Поле не заполнено.");
-        checkErrorMessageAtField(driver.findElement(By.xpath(String.format(fieldXPath, "email"))), "Поле не заполнено.");
-        checkErrorMessageAtField(driver.findElement(By.xpath(String.format(fieldXPath, "repeatEmail"))), "Поле не заполнено.");
+        // РїСЂРѕРІРµСЂРёС‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ
+        checkErrorMessageAtField(driver.findElement(By.xpath(String.format(fieldXPath, "phone"))), "РџРѕР»Рµ РЅРµ Р·Р°РїРѕР»РЅРµРЅРѕ.");
+        checkErrorMessageAtField(driver.findElement(By.xpath(String.format(fieldXPath, "email"))), "РџРѕР»Рµ РЅРµ Р·Р°РїРѕР»РЅРµРЅРѕ.");
+        checkErrorMessageAtField(driver.findElement(By.xpath(String.format(fieldXPath, "repeatEmail"))), "РџРѕР»Рµ РЅРµ Р·Р°РїРѕР»РЅРµРЅРѕ.");
 
-        // проверить сообщение об ошибке
+        // РїСЂРѕРІРµСЂРёС‚СЊ СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ
         String errorAlertXPath = "//div[@class='alert-form alert-form-error']";
         WebElement errorAlert = driver.findElement(By.xpath(errorAlertXPath));
         scrollToElementJs(errorAlert);
         waitUtilElementToBeVisible(errorAlert);
-        Assert.assertEquals("Проверка ошибки у alert на странице не была пройдено",
-                "При заполнении данных произошла ошибка", errorAlert.getText());
+        Assert.assertEquals("РџСЂРѕРІРµСЂРєР° РѕС€РёР±РєРё Сѓ alert РЅР° СЃС‚СЂР°РЅРёС†Рµ РЅРµ Р±С‹Р»Р° РїСЂРѕР№РґРµРЅРѕ",
+                "РџСЂРё Р·Р°РїРѕР»РЅРµРЅРёРё РґР°РЅРЅС‹С… РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°", errorAlert.getText());
     }
 
     @After
@@ -127,9 +127,9 @@ public class ExampleScenarioTest {
     }
 
     /**
-     * Скрол до элемента на js коде
+     * РЎРєСЂРѕР» РґРѕ СЌР»РµРјРµРЅС‚Р° РЅР° js РєРѕРґРµ
      *
-     * @param element - веб элемент до которого нужно проскролить
+     * @param element - РІРµР± СЌР»РµРјРµРЅС‚ РґРѕ РєРѕС‚РѕСЂРѕРіРѕ РЅСѓР¶РЅРѕ РїСЂРѕСЃРєСЂРѕР»РёС‚СЊ
      */
     private void scrollToElementJs(WebElement element) {
         JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
@@ -137,37 +137,37 @@ public class ExampleScenarioTest {
     }
 
     /**
-     * Явное ожидание того что элемент станет кликабельный
+     * РЇРІРЅРѕРµ РѕР¶РёРґР°РЅРёРµ С‚РѕРіРѕ С‡С‚Рѕ СЌР»РµРјРµРЅС‚ СЃС‚Р°РЅРµС‚ РєР»РёРєР°Р±РµР»СЊРЅС‹Р№
      *
-     * @param element - веб элемент до которого нужно проскролить
+     * @param element - РІРµР± СЌР»РµРјРµРЅС‚ РґРѕ РєРѕС‚РѕСЂРѕРіРѕ РЅСѓР¶РЅРѕ РїСЂРѕСЃРєСЂРѕР»РёС‚СЊ
      */
     private void waitUtilElementToBeClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     /**
-     * Явное ожидание того что элемент станет видемым
+     * РЇРІРЅРѕРµ РѕР¶РёРґР°РЅРёРµ С‚РѕРіРѕ С‡С‚Рѕ СЌР»РµРјРµРЅС‚ СЃС‚Р°РЅРµС‚ РІРёРґРµРјС‹Рј
      *
-     * @param locator - локатор до веб элемент который мы ожидаем найти и который виден на странице
+     * @param locator - Р»РѕРєР°С‚РѕСЂ РґРѕ РІРµР± СЌР»РµРјРµРЅС‚ РєРѕС‚РѕСЂС‹Р№ РјС‹ РѕР¶РёРґР°РµРј РЅР°Р№С‚Рё Рё РєРѕС‚РѕСЂС‹Р№ РІРёРґРµРЅ РЅР° СЃС‚СЂР°РЅРёС†Рµ
      */
     private void waitUtilElementToBeVisible(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     /**
-     * Явное ожидание того что элемент станет видемым
+     * РЇРІРЅРѕРµ РѕР¶РёРґР°РЅРёРµ С‚РѕРіРѕ С‡С‚Рѕ СЌР»РµРјРµРЅС‚ СЃС‚Р°РЅРµС‚ РІРёРґРµРјС‹Рј
      *
-     * @param element - веб элемент который мы ожидаем что будет  виден на странице
+     * @param element - РІРµР± СЌР»РµРјРµРЅС‚ РєРѕС‚РѕСЂС‹Р№ РјС‹ РѕР¶РёРґР°РµРј С‡С‚Рѕ Р±СѓРґРµС‚  РІРёРґРµРЅ РЅР° СЃС‚СЂР°РЅРёС†Рµ
      */
     private void waitUtilElementToBeVisible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     /**
-     * Заполнение полей определённым значений
+     * Р—Р°РїРѕР»РЅРµРЅРёРµ РїРѕР»РµР№ РѕРїСЂРµРґРµР»С‘РЅРЅС‹Рј Р·РЅР°С‡РµРЅРёР№
      *
-     * @param element - веб элемент (поле какое-то) которое планируем заполнить)
-     * @param value - значение которы мы заполняем веб элемент (поле какое-то)
+     * @param element - РІРµР± СЌР»РµРјРµРЅС‚ (РїРѕР»Рµ РєР°РєРѕРµ-С‚Рѕ) РєРѕС‚РѕСЂРѕРµ РїР»Р°РЅРёСЂСѓРµРј Р·Р°РїРѕР»РЅРёС‚СЊ)
+     * @param value - Р·РЅР°С‡РµРЅРёРµ РєРѕС‚РѕСЂС‹ РјС‹ Р·Р°РїРѕР»РЅСЏРµРј РІРµР± СЌР»РµРјРµРЅС‚ (РїРѕР»Рµ РєР°РєРѕРµ-С‚Рѕ)
      */
     private void fillInputField(WebElement element, String value) {
         scrollToElementJs(element);
@@ -176,18 +176,18 @@ public class ExampleScenarioTest {
         element.clear();
         element.sendKeys(value);
         boolean checkFlag = wait.until(ExpectedConditions.attributeContains(element, "value", value));
-        Assert.assertTrue("Поле было заполнено некорректно", checkFlag);
+        Assert.assertTrue("РџРѕР»Рµ Р±С‹Р»Рѕ Р·Р°РїРѕР»РЅРµРЅРѕ РЅРµРєРѕСЂСЂРµРєС‚РЅРѕ", checkFlag);
     }
 
     /**
-     * Проверка ошибка именно у конкретного поля
+     * РџСЂРѕРІРµСЂРєР° РѕС€РёР±РєР° РёРјРµРЅРЅРѕ Сѓ РєРѕРЅРєСЂРµС‚РЅРѕРіРѕ РїРѕР»СЏ
      *
-     * @param element веб элемент (поле какое-то) которое не заполнили
-     * @param errorMessage - ожидаемая ошибка под полем которое мы не заполнили
+     * @param element РІРµР± СЌР»РµРјРµРЅС‚ (РїРѕР»Рµ РєР°РєРѕРµ-С‚Рѕ) РєРѕС‚РѕСЂРѕРµ РЅРµ Р·Р°РїРѕР»РЅРёР»Рё
+     * @param errorMessage - РѕР¶РёРґР°РµРјР°СЏ РѕС€РёР±РєР° РїРѕРґ РїРѕР»РµРј РєРѕС‚РѕСЂРѕРµ РјС‹ РЅРµ Р·Р°РїРѕР»РЅРёР»Рё
      */
     private void checkErrorMessageAtField(WebElement element, String errorMessage) {
         element = element.findElement(By.xpath("./..//span"));
-        Assert.assertEquals("Проверка ошибки у поля не была пройдена",
+        Assert.assertEquals("РџСЂРѕРІРµСЂРєР° РѕС€РёР±РєРё Сѓ РїРѕР»СЏ РЅРµ Р±С‹Р»Р° РїСЂРѕР№РґРµРЅР°",
                 errorMessage, element.getText());
     }
 }

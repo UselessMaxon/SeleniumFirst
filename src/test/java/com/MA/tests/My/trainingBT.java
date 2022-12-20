@@ -27,7 +27,7 @@ public class trainingBT {
     String user1 = "Taraskina Valeriya";
     String user2 = "Irina Filippova";
     String user3 = "Sekretar Kompanii";
-    String user4 = "Секретарь";
+    String user4 = "РЎРµРєСЂРµС‚Р°СЂСЊ";
     String passUser = "testing";
 
     Date dateNow = new Date();
@@ -50,47 +50,47 @@ public class trainingBT {
     @Test
     public void makeBusinessTrip() {
 
-        //Шаг №1: Перейти на страницу http://training.appline.ru/user/login.
+        //РЁР°Рі в„–1: РџРµСЂРµР№С‚Рё РЅР° СЃС‚СЂР°РЅРёС†Сѓ http://training.appline.ru/user/login.
         driver.get("http://training.appline.ru/user/login");
 
-        //Шаг №2: Пройти авторизацию.
+        //РЁР°Рі в„–2: РџСЂРѕР№С‚Рё Р°РІС‚РѕСЂРёР·Р°С†РёСЋ.
         wait.until(visibilityOf(driver.findElement(By.xpath("//form[contains(@id, 'login-form')]"))));
         driver.findElement(By.xpath("//input[contains(@name, 'username')]")).sendKeys(user1);
         driver.findElement(By.xpath("//input[contains(@name, 'password')]")).sendKeys(passUser);
-        driver.findElement(By.xpath("//button[text()='Войти']")).click();
+        driver.findElement(By.xpath("//button[text()='Р’РѕР№С‚Рё']")).click();
 
-        //Шаг №3: Проверить наличие на странице заголовка Панель быстрого запуска.
-        wait.until(visibilityOf(driver.findElement(By.xpath("//h1[text()='Панель быстрого запуска']"))));
+        //РЁР°Рі в„–3: РџСЂРѕРІРµСЂРёС‚СЊ РЅР°Р»РёС‡РёРµ РЅР° СЃС‚СЂР°РЅРёС†Рµ Р·Р°РіРѕР»РѕРІРєР° РџР°РЅРµР»СЊ Р±С‹СЃС‚СЂРѕРіРѕ Р·Р°РїСѓСЃРєР°.
+        wait.until(visibilityOf(driver.findElement(By.xpath("//h1[text()='РџР°РЅРµР»СЊ Р±С‹СЃС‚СЂРѕРіРѕ Р·Р°РїСѓСЃРєР°']"))));
 
-        //Шаг №4: В выплывающем окне раздела Расходы нажать на Командировки.
-        WebElement costsList = driver.findElement(By.xpath("//ul[contains(@class, 'main-menu')]/li/a/span[text()='Расходы']"));
+        //РЁР°Рі в„–4: Р’ РІС‹РїР»С‹РІР°СЋС‰РµРј РѕРєРЅРµ СЂР°Р·РґРµР»Р° Р Р°СЃС…РѕРґС‹ РЅР°Р¶Р°С‚СЊ РЅР° РљРѕРјР°РЅРґРёСЂРѕРІРєРё.
+        WebElement costsList = driver.findElement(By.xpath("//ul[contains(@class, 'main-menu')]/li/a/span[text()='Р Р°СЃС…РѕРґС‹']"));
         costsList.click();
         wait.until(visibilityOf(costsList.findElement(By.xpath
                 ("./ancestor::li//ul[@class='dropdown-menu menu_level_1']"))));
-        driver.findElement(By.xpath("//span[text()='Командировки']")).click();
+        driver.findElement(By.xpath("//span[text()='РљРѕРјР°РЅРґРёСЂРѕРІРєРё']")).click();
         loading();
 
-        //Шаг №5: Нажать на "Создать командировку".
+        //РЁР°Рі в„–5: РќР°Р¶Р°С‚СЊ РЅР° "РЎРѕР·РґР°С‚СЊ РєРѕРјР°РЅРґРёСЂРѕРІРєСѓ".
         wait.until(visibilityOf(
-                driver.findElement(By.xpath("//h1[@class= 'oro-subtitle' and contains(text(), 'Командир')]"))));
-        driver.findElement(By.xpath("//div[@class= 'btn-group']/descendant::a[@title = 'Создать командировку']")).click();
+                driver.findElement(By.xpath("//h1[@class= 'oro-subtitle' and contains(text(), 'РљРѕРјР°РЅРґРёСЂ')]"))));
+        driver.findElement(By.xpath("//div[@class= 'btn-group']/descendant::a[@title = 'РЎРѕР·РґР°С‚СЊ РєРѕРјР°РЅРґРёСЂРѕРІРєСѓ']")).click();
         loading();
 
-        //Шаг №6: Проверить наличие на странице заголовка "Создать командировку".
+        //РЁР°Рі в„–6: РџСЂРѕРІРµСЂРёС‚СЊ РЅР°Р»РёС‡РёРµ РЅР° СЃС‚СЂР°РЅРёС†Рµ Р·Р°РіРѕР»РѕРІРєР° "РЎРѕР·РґР°С‚СЊ РєРѕРјР°РЅРґРёСЂРѕРІРєСѓ".
         WebElement titleCreateTrip = driver.findElement(By.xpath("//h1[@class= 'user-name']"));
         wait.until(visibilityOf(titleCreateTrip));
-        assertEquals("Создать командировку", titleCreateTrip.getText(), "Заголовок 'Создать командировку' не найден");
+        assertEquals("РЎРѕР·РґР°С‚СЊ РєРѕРјР°РЅРґРёСЂРѕРІРєСѓ", titleCreateTrip.getText(), "Р—Р°РіРѕР»РѕРІРѕРє 'РЎРѕР·РґР°С‚СЊ РєРѕРјР°РЅРґРёСЂРѕРІРєСѓ' РЅРµ РЅР°Р№РґРµРЅ");
 
-        //Шаг №7: На странице создания командировки заполнить или выбрать поля:...
+        //РЁР°Рі в„–7: РќР° СЃС‚СЂР°РЅРёС†Рµ СЃРѕР·РґР°РЅРёСЏ РєРѕРјР°РЅРґРёСЂРѕРІРєРё Р·Р°РїРѕР»РЅРёС‚СЊ РёР»Рё РІС‹Р±СЂР°С‚СЊ РїРѕР»СЏ:...
 
-        WebElement  departmentsChoice = driver.findElement(By.xpath("//select[contains(@name, 'businessUnit')]")); //Подразделение - выбрать Отдел внутренней разработки
+        WebElement  departmentsChoice = driver.findElement(By.xpath("//select[contains(@name, 'businessUnit')]")); //РџРѕРґСЂР°Р·РґРµР»РµРЅРёРµ - РІС‹Р±СЂР°С‚СЊ РћС‚РґРµР» РІРЅСѓС‚СЂРµРЅРЅРµР№ СЂР°Р·СЂР°Р±РѕС‚РєРё
         departmentsChoice.click();
         String departmentList = "//div[contains(@id, 'uniform-crm_business_trip') and contains (@class, 'focus')]";
         wait.until(visibilityOf(driver.findElement(
                 By.xpath(departmentList))));
-        driver.findElement(By.xpath(departmentList +"/select/option[text() ='Отдел внутренней разработки']")).click();
+        driver.findElement(By.xpath(departmentList +"/select/option[text() ='РћС‚РґРµР» РІРЅСѓС‚СЂРµРЅРЅРµР№ СЂР°Р·СЂР°Р±РѕС‚РєРё']")).click();
 
-        driver.findElement(By.xpath("//a[@id='company-selector-show']")).click(); //Принимающая организация - нажать "Открыть список" и в поле "Укажите организацию" выбрать любое значение
+        driver.findElement(By.xpath("//a[@id='company-selector-show']")).click(); //РџСЂРёРЅРёРјР°СЋС‰Р°СЏ РѕСЂРіР°РЅРёР·Р°С†РёСЏ - РЅР°Р¶Р°С‚СЊ "РћС‚РєСЂС‹С‚СЊ СЃРїРёСЃРѕРє" Рё РІ РїРѕР»Рµ "РЈРєР°Р¶РёС‚Рµ РѕСЂРіР°РЅРёР·Р°С†РёСЋ" РІС‹Р±СЂР°С‚СЊ Р»СЋР±РѕРµ Р·РЅР°С‡РµРЅРёРµ
         driver.findElement(By.xpath("//a/span[@class='select2-chosen']")).click();
         wait.until(visibilityOf(driver.findElement(
                 By.xpath("//div[@class= 'select2-search']/input[ contains(@class, 'select2-focused')]"))));
@@ -98,119 +98,119 @@ public class trainingBT {
         String stringSelectedHostOrg = selectedHostOrg.getText();
         selectedHostOrg.click();
 
-        WebElement CheckBOrderTick =  driver.findElement(   // В задачах поставить чекбокс на "Заказ билетов"
-                By.xpath("//label[text()='Заказ билетов']/preceding-sibling::input[@type= 'checkbox']"));
+        WebElement CheckBOrderTick =  driver.findElement(   // Р’ Р·Р°РґР°С‡Р°С… РїРѕСЃС‚Р°РІРёС‚СЊ С‡РµРєР±РѕРєСЃ РЅР° "Р—Р°РєР°Р· Р±РёР»РµС‚РѕРІ"
+                By.xpath("//label[text()='Р—Р°РєР°Р· Р±РёР»РµС‚РѕРІ']/preceding-sibling::input[@type= 'checkbox']"));
         CheckBOrderTick.click();
 
-        WebElement fieldDepCity = driver.findElement(By.xpath("//input[contains(@data-name, 'departure-city')]")); // Указать город выбытия
+        WebElement fieldDepCity = driver.findElement(By.xpath("//input[contains(@data-name, 'departure-city')]")); // РЈРєР°Р·Р°С‚СЊ РіРѕСЂРѕРґ РІС‹Р±С‹С‚РёСЏ
         fieldDepCity.clear();
-        fieldDepCity.sendKeys("Ижевск");
+        fieldDepCity.sendKeys("РР¶РµРІСЃРє");
 
-        WebElement fieldArrivCity = driver.findElement(By.xpath("//input[contains(@data-name, 'arrival-city')]")); // Указать город прибытия
-        fieldArrivCity.sendKeys("Пермь");
+        WebElement fieldArrivCity = driver.findElement(By.xpath("//input[contains(@data-name, 'arrival-city')]")); // РЈРєР°Р·Р°С‚СЊ РіРѕСЂРѕРґ РїСЂРёР±С‹С‚РёСЏ
+        fieldArrivCity.sendKeys("РџРµСЂРјСЊ");
 
-        WebElement datePlan = driver.findElement(By.xpath("//input[contains(@id, 'departureDatePlan') and contains(@class, 'input')]")); // Указать дату выезда
+        WebElement datePlan = driver.findElement(By.xpath("//input[contains(@id, 'departureDatePlan') and contains(@class, 'input')]")); // РЈРєР°Р·Р°С‚СЊ РґР°С‚Сѓ РІС‹РµР·РґР°
         datePlan.click();
         driver.findElement(By.xpath("//button[@data-handler='today']")).click();
         wait.until(invisibilityOf(driver.findElement(
                 By.xpath("//div[@id='ui-datepicker-div' and contains(@style, 'none')]"))));
 
-        WebElement dateReturn = driver.findElement(By.xpath("//input[contains(@id, 'returnDatePlan') and contains(@class, 'input')]")); // Указать дату возвращения
+        WebElement dateReturn = driver.findElement(By.xpath("//input[contains(@id, 'returnDatePlan') and contains(@class, 'input')]")); // РЈРєР°Р·Р°С‚СЊ РґР°С‚Сѓ РІРѕР·РІСЂР°С‰РµРЅРёСЏ
         dateReturn.sendKeys("01.01.2029");
-        driver.findElement(By.xpath("//div[@id='oro-dropdown-mask']")).click(); // Клик для закрытия окна с выбором даты
+        driver.findElement(By.xpath("//div[@id='oro-dropdown-mask']")).click(); // РљР»РёРє РґР»СЏ Р·Р°РєСЂС‹С‚РёСЏ РѕРєРЅР° СЃ РІС‹Р±РѕСЂРѕРј РґР°С‚С‹
 
-        //Шаг: 8: Проверить, что все поля заполнены правильно.
+        //РЁР°Рі: 8: РџСЂРѕРІРµСЂРёС‚СЊ, С‡С‚Рѕ РІСЃРµ РїРѕР»СЏ Р·Р°РїРѕР»РЅРµРЅС‹ РїСЂР°РІРёР»СЊРЅРѕ.
         WebElement selectedDepartment = driver.findElement(
-                By.xpath("//div[@class='selector input-widget-select' and contains(@id, 'businessUnit')]/span")); //Подразделение
-        assertEquals("Отдел внутренней разработки", selectedDepartment.getText(), "Подразделение отображается некорректно");
+                By.xpath("//div[@class='selector input-widget-select' and contains(@id, 'businessUnit')]/span")); //РџРѕРґСЂР°Р·РґРµР»РµРЅРёРµ
+        assertEquals("РћС‚РґРµР» РІРЅСѓС‚СЂРµРЅРЅРµР№ СЂР°Р·СЂР°Р±РѕС‚РєРё", selectedDepartment.getText(), "РџРѕРґСЂР°Р·РґРµР»РµРЅРёРµ РѕС‚РѕР±СЂР°Р¶Р°РµС‚СЃСЏ РЅРµРєРѕСЂСЂРµРєС‚РЅРѕ");
 
-        WebElement vieHostOrg = driver.findElement(By.xpath("//span[@class='select2-chosen']")); //Принимающая организация
-        assertEquals(stringSelectedHostOrg, vieHostOrg.getText(), "Принимающая организация отображается некорректно");
+        WebElement vieHostOrg = driver.findElement(By.xpath("//span[@class='select2-chosen']")); //РџСЂРёРЅРёРјР°СЋС‰Р°СЏ РѕСЂРіР°РЅРёР·Р°С†РёСЏ
+        assertEquals(stringSelectedHostOrg, vieHostOrg.getText(), "РџСЂРёРЅРёРјР°СЋС‰Р°СЏ РѕСЂРіР°РЅРёР·Р°С†РёСЏ РѕС‚РѕР±СЂР°Р¶Р°РµС‚СЃСЏ РЅРµРєРѕСЂСЂРµРєС‚РЅРѕ");
 
-        assertTrue(CheckBOrderTick.isSelected(), "Чекбокс 'Покупка билетов не выбран'"); //Проверка чекбокса
+        assertTrue(CheckBOrderTick.isSelected(), "Р§РµРєР±РѕРєСЃ 'РџРѕРєСѓРїРєР° Р±РёР»РµС‚РѕРІ РЅРµ РІС‹Р±СЂР°РЅ'"); //РџСЂРѕРІРµСЂРєР° С‡РµРєР±РѕРєСЃР°
 
-        assertEquals("Ижевск", fieldDepCity.getAttribute("value"), "Город выбытия введен не правильно"); // Проверка города выбытия
+        assertEquals("РР¶РµРІСЃРє", fieldDepCity.getAttribute("value"), "Р“РѕСЂРѕРґ РІС‹Р±С‹С‚РёСЏ РІРІРµРґРµРЅ РЅРµ РїСЂР°РІРёР»СЊРЅРѕ"); // РџСЂРѕРІРµСЂРєР° РіРѕСЂРѕРґР° РІС‹Р±С‹С‚РёСЏ
 
-        assertEquals("Пермь", fieldArrivCity.getAttribute("value"), "Город прибытия введен не правильно"); // Проверка города прибытия
+        assertEquals("РџРµСЂРјСЊ", fieldArrivCity.getAttribute("value"), "Р“РѕСЂРѕРґ РїСЂРёР±С‹С‚РёСЏ РІРІРµРґРµРЅ РЅРµ РїСЂР°РІРёР»СЊРЅРѕ"); // РџСЂРѕРІРµСЂРєР° РіРѕСЂРѕРґР° РїСЂРёР±С‹С‚РёСЏ
 
-        assertEquals(dateNorm.format(dateNow), datePlan.getAttribute("value"), "Дата выезда введена не правильно"); // Проверка даты выезда
+        assertEquals(dateNorm.format(dateNow), datePlan.getAttribute("value"), "Р”Р°С‚Р° РІС‹РµР·РґР° РІРІРµРґРµРЅР° РЅРµ РїСЂР°РІРёР»СЊРЅРѕ"); // РџСЂРѕРІРµСЂРєР° РґР°С‚С‹ РІС‹РµР·РґР°
 
-        assertEquals("01.01.2029", dateReturn.getAttribute("value"), "Дата приезда введена не правильно"); // Проверка даты приезда
+        assertEquals("01.01.2029", dateReturn.getAttribute("value"), "Р”Р°С‚Р° РїСЂРёРµР·РґР° РІРІРµРґРµРЅР° РЅРµ РїСЂР°РІРёР»СЊРЅРѕ"); // РџСЂРѕРІРµСЂРєР° РґР°С‚С‹ РїСЂРёРµР·РґР°
 
-        //Шаг 9: Нажать Сохранить и закрыть.
+        //РЁР°Рі 9: РќР°Р¶Р°С‚СЊ РЎРѕС…СЂР°РЅРёС‚СЊ Рё Р·Р°РєСЂС‹С‚СЊ.
         driver.findElement(By.xpath("//button[@class='btn btn-success action-button']")).click();
         wait.until(invisibilityOf(driver.findElement(By.xpath("//input[@name='input_action' and contains(@value,'route')]"))));
         loading();
 
-        //Шаг 10: Проверить, что на странице появилось сообщение: "Список командируемых сотрудников не может быть пустым".
+        //РЁР°Рі 10: РџСЂРѕРІРµСЂРёС‚СЊ, С‡С‚Рѕ РЅР° СЃС‚СЂР°РЅРёС†Рµ РїРѕСЏРІРёР»РѕСЃСЊ СЃРѕРѕР±С‰РµРЅРёРµ: "РЎРїРёСЃРѕРє РєРѕРјР°РЅРґРёСЂСѓРµРјС‹С… СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РїСѓСЃС‚С‹Рј".
         String PathError =
-                "//span[@class='validation-failed' and text()='Список командируемых сотрудников не может быть пустым']" +
-                "/ancestor::div/h5/span[text()='Командированные сотрудники']";
+                "//span[@class='validation-failed' and text()='РЎРїРёСЃРѕРє РєРѕРјР°РЅРґРёСЂСѓРµРјС‹С… СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РїСѓСЃС‚С‹Рј']" +
+                "/ancestor::div/h5/span[text()='РљРѕРјР°РЅРґРёСЂРѕРІР°РЅРЅС‹Рµ СЃРѕС‚СЂСѓРґРЅРёРєРё']";
         wait.until(visibilityOf(driver.findElement(By.xpath(PathError))));
 
-        System.out.println("Кейс №1 makeBusinessTrip 'Появление ошибки на незаполненного Командированного сотрудника' = Успешен");
+        System.out.println("РљРµР№СЃ в„–1 makeBusinessTrip 'РџРѕСЏРІР»РµРЅРёРµ РѕС€РёР±РєРё РЅР° РЅРµР·Р°РїРѕР»РЅРµРЅРЅРѕРіРѕ РљРѕРјР°РЅРґРёСЂРѕРІР°РЅРЅРѕРіРѕ СЃРѕС‚СЂСѓРґРЅРёРєР°' = РЈСЃРїРµС€РµРЅ");
     }
 
 
     @Test
     public void testExample() {
 
-        //Шаг №1: Авторизация.
+        //РЁР°Рі в„–1: РђРІС‚РѕСЂРёР·Р°С†РёСЏ.
         driver.get("http://training.appline.ru/user/login");
         wait.until(visibilityOf(driver.findElement(By.xpath("//form[contains(@id, 'login-form')]"))));
         driver.findElement(By.xpath("//input[contains(@name, 'username')]")).sendKeys(user4);
         driver.findElement(By.xpath("//input[contains(@name, 'password')]")).sendKeys(passUser);
-        driver.findElement(By.xpath("//button[text()='Войти']")).click();
-        wait.until(visibilityOf(driver.findElement(By.xpath("//h1[text()='Панель быстрого запуска']"))));
+        driver.findElement(By.xpath("//button[text()='Р’РѕР№С‚Рё']")).click();
+        wait.until(visibilityOf(driver.findElement(By.xpath("//h1[text()='РџР°РЅРµР»СЊ Р±С‹СЃС‚СЂРѕРіРѕ Р·Р°РїСѓСЃРєР°']"))));
 
-        //Шаг №2: Перейти в командировки.
-        WebElement costsList = driver.findElement(By.xpath("//ul[contains(@class, 'main-menu')]/li/a/span[text()='Расходы']"));
+        //РЁР°Рі в„–2: РџРµСЂРµР№С‚Рё РІ РєРѕРјР°РЅРґРёСЂРѕРІРєРё.
+        WebElement costsList = driver.findElement(By.xpath("//ul[contains(@class, 'main-menu')]/li/a/span[text()='Р Р°СЃС…РѕРґС‹']"));
         costsList.click();
 
         wait.until(visibilityOf(costsList.findElement(By.xpath
                 ("./ancestor::li//ul[@class='dropdown-menu menu_level_1']"))));
-        driver.findElement(By.xpath("//span[text()='Командировки']")).click();
+        driver.findElement(By.xpath("//span[text()='РљРѕРјР°РЅРґРёСЂРѕРІРєРё']")).click();
 
-        //Проверить своим методом 25:10
+        //РџСЂРѕРІРµСЂРёС‚СЊ СЃРІРѕРёРј РјРµС‚РѕРґРѕРј 25:10
         loading();
 
-        //Шаг 3: Фильтр.
-        driver.findElement(By.xpath("//div[@class='filter-item oro-drop']/div[contains(text(), 'Стадия')]")).click();
+        //РЁР°Рі 3: Р¤РёР»СЊС‚СЂ.
+        driver.findElement(By.xpath("//div[@class='filter-item oro-drop']/div[contains(text(), 'РЎС‚Р°РґРёСЏ')]")).click();
         wait.until(visibilityOf(
                 driver.findElement(By.xpath("//div[contains(@class, 'ui-multiselect-menu ui-corner-all')]"))));
         driver.findElement(By.xpath
                         ("//div[contains(@class, 'ui-multiselect-menu ui-corner-all')]//input[@type='search']")).
-                sendKeys("Согласование с ОСР");
-        driver.findElement(By.xpath("//label[@title='Согласование с ОСР']")).click();
+                sendKeys("РЎРѕРіР»Р°СЃРѕРІР°РЅРёРµ СЃ РћРЎР ");
+        driver.findElement(By.xpath("//label[@title='РЎРѕРіР»Р°СЃРѕРІР°РЅРёРµ СЃ РћРЎР ']")).click();
         loading();
 
-        String id = driver.findElement(By.xpath("//td[text()='Питер']/parent::tr/td[contains(@class, 'name')]")).getText();
-        driver.findElement(By.xpath("//div[@class='filter-item oro-drop']/div[contains(text(), 'Номер')]")).click();
+        String id = driver.findElement(By.xpath("//td[text()='РџРёС‚РµСЂ']/parent::tr/td[contains(@class, 'name')]")).getText();
+        driver.findElement(By.xpath("//div[@class='filter-item oro-drop']/div[contains(text(), 'РќРѕРјРµСЂ')]")).click();
         wait.until(visibilityOf(
                 driver.findElement(By.xpath("//input[@name='value']")))).sendKeys(id, Keys.ENTER);
         loading();
 
-        //Шаг №4: Переход в командировку.
+        //РЁР°Рі в„–4: РџРµСЂРµС…РѕРґ РІ РєРѕРјР°РЅРґРёСЂРѕРІРєСѓ.
         driver.findElement(By.xpath(String.format("//td[contains(@class, 'grid-body-cell-name')][text() = '%s']", id))).click();
 
         WebElement actualId = driver.findElement(By.xpath("//h1[@class= 'user-name']"));
         wait.until(visibilityOf(actualId));
-        assertEquals(id, actualId.getText(), "Мы попали на неверную страницу");
+        assertEquals(id, actualId.getText(), "РњС‹ РїРѕРїР°Р»Рё РЅР° РЅРµРІРµСЂРЅСѓСЋ СЃС‚СЂР°РЅРёС†Сѓ");
 
-        //Шаг 5: Отменить.
-        driver.findElement(By.xpath("//a[@data-transition-label='Отменить']")).click();
+        //РЁР°Рі 5: РћС‚РјРµРЅРёС‚СЊ.
+        driver.findElement(By.xpath("//a[@data-transition-label='РћС‚РјРµРЅРёС‚СЊ']")).click();
         loading();
         wait.until(visibilityOf(driver.findElement(By.xpath("//div[@role='dialog']"))));
         driver.findElement(By.xpath("//div[@role='dialog']//button[@type='submit']")).click();
 
-        String massage = "Не удалось выполнить переход";
+        String massage = "РќРµ СѓРґР°Р»РѕСЃСЊ РІС‹РїРѕР»РЅРёС‚СЊ РїРµСЂРµС…РѕРґ";
         Assertions.assertTrue(driver.findElement(By.xpath("//div[@class = 'flash-message-frame']")).isDisplayed(),
-                "Нотификация не отобразилась");
+                "РќРѕС‚РёС„РёРєР°С†РёСЏ РЅРµ РѕС‚РѕР±СЂР°Р·РёР»Р°СЃСЊ");
         assertEquals(massage, driver.findElement(By.xpath("//div[@class='message']")).getText(),
-                String.format("Текст нотификации не совпадает. Ожидаемое значение [%s]", massage));
+                String.format("РўРµРєСЃС‚ РЅРѕС‚РёС„РёРєР°С†РёРё РЅРµ СЃРѕРІРїР°РґР°РµС‚. РћР¶РёРґР°РµРјРѕРµ Р·РЅР°С‡РµРЅРёРµ [%s]", massage));
 
 
-        System.out.println("Тест кейс testExample выполнен успешно");
+        System.out.println("РўРµСЃС‚ РєРµР№СЃ testExample РІС‹РїРѕР»РЅРµРЅ СѓСЃРїРµС€РЅРѕ");
     }
 
     @AfterEach
