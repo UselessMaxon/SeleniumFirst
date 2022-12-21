@@ -4,26 +4,24 @@ import com.MA.tests.My.extension.DriverExtension;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import project.BasePage;
 import project.DriverManager;
-import project.properties.TestProperties;
+import project.pages.LoginPage;
+import project.steps.LoginSteps;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOf;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
+import static project.properties.TestProperties.getInstance;
 
 @ExtendWith(DriverExtension.class)
 class ExampleFor2 {
@@ -31,25 +29,22 @@ class ExampleFor2 {
     Date dateNow = new Date();
     DateFormat dateNorm = new SimpleDateFormat("dd.MM.yyyy");
 
-    private final WebDriver driver = DriverManager.getWebDriver();
-    private final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    private final Properties properties = TestProperties.getInstance().getProperties();
+    private LoginSteps loginSteps = new LoginSteps();
+    private final Properties properties = getInstance().getProperties();
+
+
 
 
     @Test
     void makeBusinessTrip() {
 
         //Шаг №1: Перейти на страницу http://training.appline.ru/user/login.
-        driver.get(properties.getProperty("HOSTNAME"));
 
         //Шаг №2: Пройти авторизацию.
-        wait.until(visibilityOf(driver.findElement(By.xpath("//form[contains(@id, 'login-form')]"))));
-        driver.findElement(By.xpath("//input[contains(@name, 'username')]")).sendKeys(properties.getProperty("LOGIN"));
-        driver.findElement(By.xpath("//input[contains(@name, 'password')]")).sendKeys(properties.getProperty("PASSWORD"));
-        driver.findElement(By.xpath("//button[text()='Войти']")).click();
-
         //Шаг №3: Проверить наличие на странице заголовка Панель быстрого запуска.
-        wait.until(visibilityOf(driver.findElement(By.xpath("//h1[text()='Панель быстрого запуска']"))));
+        loginSteps.login(properties.getProperty("LOGIN"), properties.getProperty("PASSWORD"));
+
+
 
         //Шаг №4: В выплывающем окне раздела Расходы нажать на Командировки.
         WebElement costsList = driver.findElement(By.xpath("//ul[contains(@class, 'main-menu')]/li/a/span[text()='Расходы']"));
