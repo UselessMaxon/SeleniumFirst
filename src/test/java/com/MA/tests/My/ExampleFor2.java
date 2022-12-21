@@ -1,12 +1,15 @@
 package com.MA.tests.My;
 
+import com.MA.tests.My.extension.DriverExtension;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import project.DriverManager;
 import project.properties.TestProperties;
 
 import java.text.DateFormat;
@@ -21,29 +24,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOf;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
+@ExtendWith(DriverExtension.class)
 public class ExampleFor2 {
 
     Date dateNow = new Date();
     DateFormat dateNorm = new SimpleDateFormat("dd.MM.yyyy");
 
-    private WebDriver driver;
-    private WebDriverWait wait;
-    private Properties properties = TestProperties.getInstance().getProperties();
+    private final WebDriver driver = DriverManager.getWebDriver();
+    private final WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    private final Properties properties = TestProperties.getInstance().getProperties();
 
-
-    @BeforeEach
-    public void before() {
-        System.setProperty(properties.getProperty("WEB_DRIVER"),properties.getProperty ("WEB_DRIVER_PATH"));
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(1000));
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().timeouts().setScriptTimeout(Duration.ofMillis(500));
-    }
 
     @Test
-    public void makeBusinessTrip() {
+    void makeBusinessTrip() {
 
         //Шаг №1: Перейти на страницу http://training.appline.ru/user/login.
         driver.get(properties.getProperty("HOSTNAME"));
@@ -147,6 +140,18 @@ public class ExampleFor2 {
     }
 
 
+    public void loading() {
+        wait.until(invisibilityOf(driver.findElement(By.xpath("//div[@class='loader-mask shown']"))));
+    }
+
+}
+
+
+
+
+
+
+
 //    @Test
 //    @Disabled
 //    public void testExample() {
@@ -209,20 +214,3 @@ public class ExampleFor2 {
 //        System.out.println("Тест кейс testExample выполнен успешно");
 //    }
 
-    @AfterEach
-    public void after() {
-
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        driver.quit();
-    }
-
-    public void loading() {
-        wait.until(invisibilityOf(driver.findElement(By.xpath("//div[@class='loader-mask shown']"))));
-    }
-
-}

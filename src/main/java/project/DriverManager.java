@@ -33,6 +33,11 @@ public class DriverManager {
     }
 
     public static void closeDriver(){
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         driver.quit();
     }
 
