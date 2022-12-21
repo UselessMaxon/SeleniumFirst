@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import project.DriverManager;
 import project.pages.LoginPage;
 import project.steps.LoginSteps;
+import project.steps.MainPageSteps;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -29,8 +30,10 @@ class ExampleFor2 {
     Date dateNow = new Date();
     DateFormat dateNorm = new SimpleDateFormat("dd.MM.yyyy");
 
-    private LoginSteps loginSteps = new LoginSteps();
+    private final LoginSteps loginSteps = new LoginSteps();
+    private final MainPageSteps mainPageSteps = new MainPageSteps();
     private final Properties properties = getInstance().getProperties();
+
 
 
 
@@ -44,15 +47,10 @@ class ExampleFor2 {
         //Шаг №3: Проверить наличие на странице заголовка Панель быстрого запуска.
         loginSteps.login(properties.getProperty("LOGIN"), properties.getProperty("PASSWORD"));
 
-
-
         //Шаг №4: В выплывающем окне раздела Расходы нажать на Командировки.
-        WebElement costsList = driver.findElement(By.xpath("//ul[contains(@class, 'main-menu')]/li/a/span[text()='Расходы']"));
-        costsList.click();
-        wait.until(visibilityOf(costsList.findElement(By.xpath
-                ("./ancestor::li//ul[@class='dropdown-menu menu_level_1']"))));
-        driver.findElement(By.xpath("//span[text()='Командировки']")).click();
-        loading();
+        mainPageSteps.filterByAssignment();
+
+
 
         //Шаг №5: Нажать на "Создать командировку".
         wait.until(visibilityOf(

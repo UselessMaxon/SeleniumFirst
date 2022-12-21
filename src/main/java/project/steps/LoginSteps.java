@@ -8,5 +8,6 @@ public class LoginSteps {
         LoginPage loginPage = new LoginPage();
         loginPage.enterLoginAndPassword(login, password);
         loginPage.submitClick();
+
     }
 }
