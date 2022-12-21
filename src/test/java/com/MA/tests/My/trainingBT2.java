@@ -9,7 +9,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.text.DateFormat;
@@ -20,10 +19,10 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOf;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
-public class trainingBT {
+public class trainingBT2 {
 
     String user1 = "Taraskina Valeriya";
     String user2 = "Irina Filippova";
@@ -42,10 +41,10 @@ public class trainingBT {
     public void before() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/webdriver/chromedriver.exe");
         driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(1000));
+        wait = new WebDriverWait(driver,10,1000);
         driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     @Test
