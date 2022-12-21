@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import project.BasePage;
 import project.DriverManager;
 import project.properties.TestProperties;
 
@@ -25,7 +26,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOf;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
 @ExtendWith(DriverExtension.class)
-public class ExampleFor2 {
+class ExampleFor2 {
 
     Date dateNow = new Date();
     DateFormat dateNorm = new SimpleDateFormat("dd.MM.yyyy");
@@ -140,9 +141,7 @@ public class ExampleFor2 {
     }
 
 
-    public void loading() {
-        wait.until(invisibilityOf(driver.findElement(By.xpath("//div[@class='loader-mask shown']"))));
-    }
+
 
 }
 
