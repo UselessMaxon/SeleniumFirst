@@ -3,7 +3,6 @@ package com.MA.tests.My.extension;
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
-import project.DriverManager;
 
 import static project.DriverManager.*;
 

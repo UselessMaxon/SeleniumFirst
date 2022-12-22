@@ -4,17 +4,18 @@ import com.MA.tests.My.extension.DriverExtension;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import project.DriverManager;
-import project.pages.LoginPage;
+
+import project.pages.BusinessTripPage;
+
+import project.steps.BusinessTripSteps;
 import project.steps.LoginSteps;
 import project.steps.MainPageSteps;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
+
 import java.util.Date;
 import java.util.Properties;
 
@@ -32,6 +33,9 @@ class ExampleFor2 {
 
     private final LoginSteps loginSteps = new LoginSteps();
     private final MainPageSteps mainPageSteps = new MainPageSteps();
+    private final BusinessTripSteps businessTripSteps = new BusinessTripSteps();
+
+
     private final Properties properties = getInstance().getProperties();
 
 
@@ -53,10 +57,8 @@ class ExampleFor2 {
 
 
         //Шаг №5: Нажать на "Создать командировку".
-        wait.until(visibilityOf(
-                driver.findElement(By.xpath("//h1[@class= 'oro-subtitle' and contains(text(), 'Командир')]"))));
-        driver.findElement(By.xpath("//div[@class= 'btn-group']/descendant::a[@title = 'Создать командировку']")).click();
-        loading();
+        businessTripSteps.createTrip();
+
 
         //Шаг №6: Проверить наличие на странице заголовка "Создать командировку".
         WebElement titleCreateTrip = driver.findElement(By.xpath("//h1[@class= 'user-name']"));
